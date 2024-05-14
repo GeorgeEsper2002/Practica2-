@@ -6,4 +6,5 @@ set(CMAKE_C_STANDARD 11)
 add_executable(PracticasC   main3.c
                             main1.c
                             main2.c
+        main4c.c
 )
