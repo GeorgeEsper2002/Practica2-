@@ -55,18 +55,19 @@
 #include <stdio.h>
 #include <math.h>
 void ingresoDatos(int llamadas[1000]);
-void procesoDatos(int llamadas[1000],int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor);
-void SalidaDatos(int llamadasConvertidas[1000][3]);
+void procesoDatos(int llamadas[1000],int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor,int *promedioLlamadas);
+void SalidaDatos(int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor,int *promedioLlamadas);
 
 int main()
 {   printf("EJERCICIO 2 - CONVERSION DE LLAMADAS.");
     int llamadas[1000];
     int llamadaMenor;
+    int promedioLlamadas;
     int llamada10min;
     int llamadasConvertidas[1000][3];
     ingresoDatos(llamadas);
-    procesoDatos(llamadas, llamadasConvertidas, &llamada10min, &llamadaMenor);
-    SalidaDatos(llamadasConvertidas);
+    procesoDatos(llamadas, llamadasConvertidas, &llamada10min, &llamadaMenor,&promedioLlamadas);
+    SalidaDatos(llamadasConvertidas, &llamada10min, &llamadaMenor,&promedioLlamadas);
     return 0;
 }
 
@@ -75,29 +76,54 @@ void ingresoDatos(int llamadas[1000])
 {
     int llamada;
     printf("Funcion Ingreso Datos:\n");
-    for (int i = 0; i < 1000; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         do
         {
-            printf("Ingresa la duracion de la llamada %d",i+1);
-            scanf(" %lf",&llamada);
-        } while (llamada<=0.0);
+            printf("Ingresa la duracion de la llamada %d en segundos",i+1);
+            scanf(" %d",&llamada);
+        } while (llamada<=0);
         llamadas[i]=llamada;
     }
 }
 
-void procesoDatos(int llamadas[1000],int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor)
-{
+void procesoDatos(int llamadas[1000],int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor,int *promedioLlamadas)
+{   *llamadaMenor=llamadasConvertidas[0][0];
+    int totalLlamadas=0;
     printf("Funcion Proceso Datos:\n");
-    for (int i = 0; i < 1000; ++i) // horas
+    for (int i = 0; i < 3; ++i) // Pasaje de unidades
     {
         llamadasConvertidas[i][0]= llamadas[i];//Segundos
         llamadasConvertidas[i][1]=floor(llamadas[i]/60);//Minutos
         llamadasConvertidas[i][2]=floor(llamadas[i]/3600);//Horas
     }
 
-    for(int j=0;)
+    for(int j=0;j<3;j++)
     {
+            if(llamadasConvertidas[j][0]<*llamadaMenor)// Validacion de que que llamada es menor
+            {
+                *llamadaMenor=llamadasConvertidas[j][0];
+            }
+            if(llamadasConvertidas[j][1]>10)//cantidad de llamadas que superan los 10 min
+            {
+                *llamada10min+=1;
+            }
 
     }
+    for(int k=0;k<3;k++)
+    {
+        totalLlamadas+=llamadasConvertidas[k][0];
+    }
+    *promedioLlamadas=totalLlamadas/3;
+
+
+}
+
+
+void SalidaDatos(int llamadasConvertidas[1000][3],int *llamada10min,int *llamadaMenor,int *promedioLlamadas)
+{
+
+    printf("Llamada menor duracion %p\n",*llamadaMenor);
+    printf("Cantidad de llamadas superiores a 10 minutos %p\n",*llamada10min);
+    printf("Promedio de llamadas en Segundos %p\n",*promedioLlamadas);
 }
