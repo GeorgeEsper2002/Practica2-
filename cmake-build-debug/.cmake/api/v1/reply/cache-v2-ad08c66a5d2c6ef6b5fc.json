@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Usuario/Desktop/PracticasC/cmake-build-debug"
+			"value" : "d:/Usuario/Desktop/practica2C/practicaC/Practica2-/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "28"
+			"value" : "27"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "8"
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Usuario/Desktop/PracticasC/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Usuario/Desktop/PracticasC"
+			"value" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/PracticasC"
+			"value" : "C:/Program Files (x86)/practicaC"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -731,7 +731,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "PracticasC"
+			"value" : "practicaC"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -883,7 +883,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Usuario/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.28"
+			"value" : "C:/Users/Usuario/AppData/Local/Programs/CLion/bin/cmake/win/x64/share/cmake-3.27"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1126,7 +1126,19 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "PracticasC_BINARY_DIR",
+			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "linker supports push/pop state"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "TRUE"
+		},
+		{
+			"name" : "practicaC_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1135,10 +1147,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Usuario/Desktop/PracticasC/cmake-build-debug"
+			"value" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-/cmake-build-debug"
 		},
 		{
-			"name" : "PracticasC_IS_TOP_LEVEL",
+			"name" : "practicaC_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1150,7 +1162,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "PracticasC_SOURCE_DIR",
+			"name" : "practicaC_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1159,19 +1171,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Usuario/Desktop/PracticasC"
-		},
-		{
-			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "linker supports push/pop state"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
+			"value" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-"
 		}
 	],
 	"kind" : "cache",

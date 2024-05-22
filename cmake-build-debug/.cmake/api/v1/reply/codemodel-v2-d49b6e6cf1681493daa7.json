@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.28"
+						"string" : "3.27"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "PracticasC",
+					"name" : "practicaC",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "PracticasC::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PracticasC-Debug-e0f5fd3b6dacc2c5a48c.json",
-					"name" : "PracticasC",
+					"id" : "practicaC::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practicaC-Debug-4c87ab02ee4997042c43.json",
+					"name" : "practicaC",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Usuario/Desktop/PracticasC/cmake-build-debug",
-		"source" : "C:/Users/Usuario/Desktop/PracticasC"
+		"build" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-/cmake-build-debug",
+		"source" : "D:/Usuario/Desktop/practica2C/practicaC/Practica2-"
 	},
 	"version" : 
 	{

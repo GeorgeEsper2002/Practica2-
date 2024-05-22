@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "PracticasC.exe"
+			"path" : "practicaC.exe"
 		},
 		{
-			"path" : "PracticasC.pdb"
+			"path" : "practicaC.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,14 +52,11 @@
 			},
 			"sourceIndexes" : 
 			[
-				0,
-				1,
-				2,
-				3
+				0
 			]
 		}
 	],
-	"id" : "PracticasC::@6890427a1f51a3e7e1df",
+	"id" : "practicaC::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -79,8 +76,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "PracticasC",
-	"nameOnDisk" : "PracticasC.exe",
+	"name" : "practicaC",
+	"nameOnDisk" : "practicaC.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -92,10 +89,7 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				1,
-				2,
-				3
+				0
 			]
 		}
 	],
@@ -104,25 +98,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main3.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "main1.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "main2.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "main4c.c",
+			"path" : "main13.c",
 			"sourceGroupIndex" : 0
 		}
 	],
