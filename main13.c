@@ -35,6 +35,7 @@ los clasifica según la prioridad de atención:
 
 struct persona{
     int nroDoc;
+    char sexo;
     char cobertura;
     int edad;
     char prioridad;
@@ -42,20 +43,20 @@ struct persona{
 
 struct prioridades
 {
-    char prioridad;
     float proporcional;
     int cantidad;
 };
 void ingresarDatos(struct persona pacientes[T][C]);
 void procesoDatosDia(struct persona pacientes[T][C],int promedioEdadDia[C],char mayorCobertura[C],struct prioridades categorias[C][D]);
-void procesoDatosSemana(struct persona pacientes[T][C]);
+void procesoDatosSemana(struct persona pacientes[T][C],struct persona mayorEdad,int *totalPacientes,int *masCriticos,int *masGraves,int *ganador);
 void salidaDatosDia(int promedioEdadDia[C], char mayorCobertura[C],struct prioridades categorias[C][D]);
 void salidaDatosSemana(struct persona pacientes[T][C]);
 
 void funcionA(struct persona pacientes[T][C],int promedioEdadDia[C]);
 void funcionB(struct persona pacientes[T][C],char mayorCobertura[C]);
 void funcionC(struct persona pacientes [T][C],struct prioridades categorias[C][D]);
-
+void funcionD(struct persona pacientes[T][C],struct persona mayorEdad,int *totalPacientes);
+void funcionE(struct persona pacientes[T][C],int *masCriticos,int *masGraves,int *ganador);
 
 
 int main(){
@@ -64,11 +65,15 @@ int main(){
     struct persona mayorEdad;
     struct prioridades categorias[C][D];
     int promedioEdadDia[C];
+    int ganador;
+    int totalPacientes;
+    int masCriticos;
+    int masGraves;
     char mayorCobertura[C]; // Llena el arreglo con P u O, si cantidad de p==o se llena con N
     printf("Programa Control Guardia Hospital\n");
     ingresarDatos(pacientes);
     procesoDatosDia(pacientes,promedioEdadDia,mayorCobertura,categorias);
-    procesoDatosSemana(pacientes);
+    procesoDatosSemana(pacientes,mayorEdad,&totalPacientes,&masCriticos,&masGraves,&ganador);
     salidaDatosDia(promedioEdadDia,mayorCobertura,categorias);
     salidaDatosSemana(pacientes);
     return 0;
@@ -76,10 +81,9 @@ int main(){
 
 
 
-void ingresarDatos(struct persona pacientes[T][C])
-{
+void ingresarDatos(struct persona pacientes[T][C]){
     int nroDoc,edad,j=0;
-    char cob,prioridad;
+    char cob,prioridad,sexo;
     printf("Funcion Ingreso datos\n");
     for(int i=0;i<7;i++)
     {
@@ -92,6 +96,14 @@ void ingresarDatos(struct persona pacientes[T][C])
                     scanf(" %d",&nroDoc);
 
                 }while(nroDoc<0);
+                do
+                {
+                    printf("Ingresa tu Sexo M/F:");
+                    scanf(" %c",&sexo);
+                    sexo= toupper(sexo);
+
+                }while(sexo!='M'&& sexo!='F');
+
 
                 do
                 {
@@ -115,6 +127,7 @@ void ingresarDatos(struct persona pacientes[T][C])
 
                 }while(edad<0);
                 pacientes[j][i].nroDoc=nroDoc;
+                pacientes[j][i].sexo=sexo;
                 pacientes[j][i].cobertura=cob;
                 pacientes[j][i].edad=edad;
                 pacientes[j][i].prioridad=prioridad;
@@ -125,7 +138,7 @@ void ingresarDatos(struct persona pacientes[T][C])
                 pacientes[j][i].nroDoc=nroDoc;//pone un 0 al final de los documentos
             }
 
-        }while(nroDoc!=0);// sale del do while cuando no hay mas pacientes
+        }while(pacientes[j][i].nroDoc!=0 && j<T);// sale del do while cuando no hay mas pacientes
     }// fin de for, cambio de dia
     return;
 }
@@ -139,9 +152,10 @@ void procesoDatosDia(struct persona pacientes[T][C],int promedioEdadDia[C],char 
 
     return;
 }
-void procesoDatosSemana(struct persona pacientes[T][C])
+void procesoDatosSemana(struct persona pacientes[T][C],struct persona mayorEdad,int *totalPacientes,int *masCriticos,int *masGraves,int *ganador)
 {
-
+    funcionD(pacientes,mayorEdad,totalPacientes);
+    funcionE(pacientes,masCriticos,masGraves,ganador);
 }
 
 void salidaDatosDia(int promedioEdadDia[C], char mayorCobertura[C], struct prioridades categorias[C][D])
@@ -184,11 +198,11 @@ void funcionB(struct persona pacientes[T][C],char mayorCobertura[C])
         {
             if (pacientes[j][i].cobertura=='O')
             {
-                totalObraSocial+=1;
+                totalObraSocial++;
             }
             else if(pacientes[j][i].cobertura=='P')
             {
-                totalPrepaga+=1;
+                totalPrepaga++;
             }
         }
         if(totalObraSocial>totalPrepaga)
@@ -214,59 +228,135 @@ void funcionB(struct persona pacientes[T][C],char mayorCobertura[C])
     Verde: Atención en menos de 120 minutos - urgencias menores.
     Azul: Demora máxima de 240 minutos - problemas no urgentes.
  */
-void funcionC(struct persona pacientes [T][C],struct prioridades categorias[C][D])
-{
-    int cantidadPacientes;
-    int j;
-    int r=0/*Rojo*/,n=0/*Naranja*/,a=0/*Amarillo*/,v=0/*Verde*/,z=0/*Azul*/;
-    for(int i=0;i<C;i++)//itera de 1 a 7
-    {
-        j=0;
-        cantidadPacientes=0;
-        while(pacientes[j][i].nroDoc!=0 && j<T)// itera hasta que encuentre un 0
-        {
-            cantidadPacientes++;
-            j++;
-        }
-
-    }
-    categorias[0][0].prioridad='R';
-    categorias[1][1].prioridad='N';
-    categorias[2][2].prioridad='A';
-    categorias[3][3].prioridad='V';
-    categorias[4][4].prioridad='Z';
+void funcionC(struct persona pacientes[T][C],struct prioridades categorias[C][D]){
+    int cantidadPacientes=0;
+    int j,g,n;
+    int r=0/*Rojo*//*Naranja*/,a=0/*Amarillo*/,v=0/*Verde*/,z=0/*Azul*/;
+    //Creo un acumulador para poder sacar los proporcionales
     for(int i=0;i<C;i++)
     {
-            for(int g=0;g<T;g++)
+        n=0;
+        do{
+            cantidadPacientes++;
+            n++;
+        } while (pacientes[n][i].nroDoc!=0 && n<T);
+    }
+    // Inicializo los acumuladores de pacientes atendidos en cada categoria
+    for(int k=0;k<C;k++)
+    {
+        for(int h=0;h<D;h++)
+        {
+            categorias[k][h].cantidad=0;
+        }
+    }
+  // Sumo los acumuladores de pacientes atendidos dependiendo la categoria de urgencia
+    for(int i=0;i<C;i++)
+    {       g=0;
+            do
             {
                 switch (pacientes[g][i].prioridad) 
                 {
                     case 'R':
-                        categorias[i][0].;
+                        categorias[i][0].cantidad++;
                         break;
                     case 'N':
-                        n++;
+                        categorias[i][1].cantidad++;
                         break;
                     case 'A':
-                        a++;
+                        categorias[i][2].cantidad++;
                         break;
                     case 'V':
-                        v++;
+                        categorias[i][3].cantidad++;
                         break;
                     case 'Z':
-                        z++;
+                        categorias[i][4].cantidad++;
+                        break;
+                }
+                g++;
+            }while(pacientes[g][i].nroDoc!=0 && g<T);
+    }
+//Calcula los proporcionales
+    for(int i=0;i<C;i++)
+    {
+        for(int x=0;x<D;x++)
+        {
+            categorias[i][x].proporcional=((float)categorias[i][x].cantidad/(float)cantidadPacientes);
+        }
+    }
+
+}
+// Funcion que busca la persona de mayor edad ingresada
+void funcionD(struct persona pacientes[T][C],struct persona mayorEdad,int *totalPacientes){
+    int j;
+    *totalPacientes=0;
+    mayorEdad.edad=1;
+    for(int i=0;i<C;i++)
+    {   j=0;
+        do
+        {
+            if(pacientes[j][i].nroDoc!=0)
+            {
+                if(pacientes[j][i].edad>mayorEdad.edad)// compara las edades de todos los pacientes cargados
+                {
+                    mayorEdad.nroDoc=pacientes[j][i].nroDoc;
+                    mayorEdad.edad=pacientes[j][i].edad;
+                    mayorEdad.nroDoc=pacientes[j][i].nroDoc;
+                    mayorEdad.sexo=pacientes[j][i].sexo;
+                    mayorEdad.cobertura=pacientes[j][i].cobertura;
+                    mayorEdad.prioridad=pacientes[j][i].prioridad;
+
+
+                }
+                *totalPacientes++;
+            }
+            j++;
+        } while (pacientes[j][i].nroDoc!=0 && j<T);
+
+    }
+
+
+}
+// Funcion que compara todos los dias quienes ingresaron en mayor cantidad si criticos o graves.
+void funcionE(struct persona pacientes[T][C],int *masCriticos,int *masGraves, int *ganador)
+{   int j;
+    *masGraves=0;
+    *masCriticos=0;
+    for(int i=0;i<C;i++)
+    {   j=0;
+        do
+        {
+            if(pacientes[j][i].nroDoc!=0)
+            {
+                switch (pacientes[j][i].prioridad)
+                {
+                    case 'R':
+                        *masCriticos++;
+                        break;
+                    case 'N':
+                        *masGraves++;
                         break;
                 }
             }
+            j++;
+        } while (pacientes[j][i].nroDoc!=0 && j<T);
+
     }
 
-    for (int i = 0; i < C; i++) 
-    {
-        for(int k=0;k<5;k++)
-        {
-            
-        }    
+    if(*masCriticos>*masGraves){
+        *ganador=1;
     }
-    
-    
+    else if(*masCriticos<*masGraves){
+        *ganador=2;
+    }
+    else
+    {
+        *ganador=0;
+    }
+
 }
+
+
+
+
+
+
